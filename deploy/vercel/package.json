@@ -1,0 +1,8 @@
+{
+	"name": "forever-sim-vercel",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"prepare-site": "node prepare.mjs"
+	}
+}
