@@ -78,6 +78,14 @@ describe('finishIndividualImport', () => {
 		expect(toasts[0].body).toContain('not imported');
 	});
 
+	// SpookieUI's export builds the string against these trees and marks it, so it is applied.
+	it('applies the talent string when the exporter targets these trees', async () => {
+		await finishIndividualImport(host, parsed({ talentsForTheseTrees: true }));
+
+		expect(player.setTalentsString).toHaveBeenCalledWith('05002001-0550000502-05032');
+		expect(toasts.every(toast => toast.variant !== 'warning')).toBe(true);
+	});
+
 	// `--` is what an empty three-tree talent string looks like: the import carried no talents, so
 	// there is nothing to warn about either.
 	it('says nothing when the export carried no talents at all', async () => {

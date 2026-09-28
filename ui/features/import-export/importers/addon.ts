@@ -34,7 +34,9 @@ export const ADDON_IMPORTER: ImporterDefinition = {
 		}
 
 		const addonVersion = await WSE_VERSION;
-		if (addonVersion && ((importJson['version'] as string) || '') != addonVersion) {
+		// SpookieUI's exporter is versioned on its own, not against wowsims/exporter.
+		const fromSpookie = ((importJson['version'] as string) || '').startsWith('SpookieUI ');
+		if (!fromSpookie && addonVersion && ((importJson['version'] as string) || '') != addonVersion) {
 			toastManager.add({
 				variant: 'warning',
 				body: `Addon is not up to date. Addon version : '${importJson['version']}', Latest version : '${addonVersion}'`,
@@ -88,6 +90,7 @@ export const ADDON_IMPORTER: ImporterDefinition = {
 			race,
 			equipmentSpec,
 			talentsStr,
+			talentsForTheseTrees: importJson['talentTrees'] === 'forever',
 			professions,
 		});
 	},
