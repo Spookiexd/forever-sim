@@ -1,0 +1,3 @@
+# Check out text files with LF on every platform. Windows clones with core.autocrlf=true
+# otherwise get CRLF, which breaks golden-file tests such as TestRegisteredEffects.
+* text=auto eol=lf
